@@ -31,6 +31,7 @@ The **init-worker** runs automatically on start and verifies that `wiki/` and `d
 | 5 | Review the draft in `drafts/` | — | Make any edits you want |
 | 6 | `/publish` | **publisher** | Lists finalized drafts, asks which to copy into `wiki/`, handles adds/replacements/deletes |
 | 7 | `/sync` | **git-worker** | Shows git diff, asks for a commit message and your confirmation, then commits and pushes |
+| 8 | `/archive` | **archiver** | Exports the session transcript and tars up `drafts/` for safekeeping |
 
 ## Agents
 
@@ -42,6 +43,7 @@ The **init-worker** runs automatically on start and verifies that `wiki/` and `d
 | **scribe** | `/draft <description>` | Produces wiki-formatted markdown drafts with YAML frontmatter |
 | **publisher** | `/publish` | Writes confirmed drafts from `drafts/` into `wiki/` |
 | **git-worker** | `/sync` | Stages, commits, and pushes with user confirmation at each step |
+| **archiver** | `/archive` | Exports session transcript and archives `drafts/` into a tarball |
 
 ## Important Rules
 
