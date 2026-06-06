@@ -1,0 +1,119 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "build",
+  "agent": {
+    "init-worker": {
+      "description": "Verifies wiki repo and drafts directory exist, proposes fixes via git-worker if needed",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/prompts/init-worker.md}",
+      "permission": {
+        "bash": "allow",
+        "read": "allow",
+        "task": {
+          "git-worker": "allow"
+        }
+      }
+    },
+    "contextualizer": {
+      "description": "Analyzes raw files in drafts/, asks user for interpretation, builds information cache",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/prompts/contextualizer.md}",
+      "permission": {
+        "read": "allow",
+        "write": "allow",
+        "edit": "allow"
+      }
+    },
+    "scribe": {
+      "description": "Creates formatted wiki page drafts from cache + user guidance",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/prompts/scribe.md}",
+      "permission": {
+        "read": "allow",
+        "write": "allow",
+        "edit": "allow"
+      }
+    },
+    "publisher": {
+      "description": "Copies finalized drafts from drafts/ to wiki/ on user confirmation",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/prompts/publisher.md}",
+      "permission": {
+        "read": "allow",
+        "write": "allow",
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "git-worker": {
+      "description": "Commits and pushes wiki repo changes on user confirmation",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/prompts/git-worker.md}",
+      "permission": {
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+    "researcher": {
+      "description": "Searches the web and wiki at user-specified paths, saves raw data to drafts/",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/prompts/researcher.md}",
+      "permission": {
+        "websearch": "allow",
+        "webfetch": "ask",
+        "write": "allow",
+        "read": "allow"
+      }
+    },
+    "archiver": {
+      "description": "Exports session transcript and archives drafts/ into a tarball",
+      "mode": "subagent",
+      "prompt": "{file:.opencode/prompts/archiver.md}",
+      "permission": {
+        "read": "allow",
+        "write": "allow",
+        "edit": "allow",
+        "bash": "allow",
+        "question": "allow"
+      }
+    }
+  },
+  "command": {
+    "contextualize": {
+      "description": "Analyze raw drafts and build information cache",
+      "template": "I'm ready to contextualize the files in drafts/. Let's go through them.",
+      "agent": "contextualizer",
+      "subtask": true
+    },
+    "draft": {
+      "description": "Create a wiki page draft from cache and user request",
+      "template": "Tell me what wiki page you'd like me to write.$ARGUMENTS",
+      "agent": "scribe",
+      "subtask": true
+    },
+    "publish": {
+      "description": "Write finalized drafts into the wiki repo",
+      "template": "Let's look at what drafts are ready to publish.",
+      "agent": "publisher",
+      "subtask": true
+    },
+    "sync": {
+      "description": "Commit and push wiki changes to remote",
+      "template": "Ready to sync the wiki repo? I'll walk you through it.",
+      "agent": "git-worker",
+      "subtask": true
+    },
+    "research": {
+      "description": "Search the web and fetch sources for a topic",
+      "template": "Help me research: $ARGUMENTS",
+      "agent": "researcher",
+      "subtask": true
+    },
+    "archive": {
+      "description": "Export session transcript and archive drafts/ into a tarball",
+      "template": "Archive the current session and drafts/ folder.",
+      "agent": "archiver",
+      "subtask": true
+    }
+  }
+}
