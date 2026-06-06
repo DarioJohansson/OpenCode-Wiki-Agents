@@ -22,16 +22,14 @@ The **init-worker** runs automatically on start and verifies that `wiki/` and `d
 
 ## Workflow
 
-| Step | User Action | Agent | What Happens |
-|---|---|---|---|---|
-| 1 | Paste raw notes, command output, diagrams into **`drafts/`** | — | Unprocessed source data lands in the sandbox |
-| 2 | `/research <topic>` | **researcher** | Searches the web, groups results semantically, asks which URLs to fetch, saves raw data to `drafts/` (also reads specific wiki pages if user specifies a path) |
-| 3 | `/contextualize` | **contextualizer** | Scans `drafts/`, asks you to describe each file, builds an information cache (`.cache-*.md`) |
-| 4 | `/draft create a page about <topic>` | **scribe** | Reads the cache + relevant raw files, produces a formatted markdown page with frontmatter, saves to `drafts/` |
-| 5 | Review the draft in `drafts/` | — | Make any edits you want |
-| 6 | `/publish` | **publisher** | Lists finalized drafts, asks which to copy into `wiki/`, handles adds/replacements/deletes |
-| 7 | `/sync` | **git-worker** | Shows git diff, asks for a commit message and your confirmation, then commits and pushes |
-| 8 | `/archive` | **archiver** | Exports the session transcript and tars up `drafts/` for safekeeping |
+1. **Populate `drafts/`** — Paste raw notes, command output, or diagrams into the sandbox.
+2. **`/research <topic>`** *(optional)* — Researcher searches the web, fetches approved sources, and saves raw data to `drafts/`.
+3. **`/contextualize`** — Contextualizer scans `drafts/`, asks you to describe each file, and builds an information cache.
+4. **`/draft <description>`** — Scribe reads the cache and raw files, then produces a formatted wiki page draft in `drafts/`.
+5. **Review** — Edit the draft in `drafts/` as needed.
+6. **`/publish`** — Publisher lists finalized drafts, asks which to copy into `wiki/`.
+7. **`/sync`** — Git-worker shows the diff, asks for a commit message, then commits and pushes.
+8. **`/archive`** *(optional)* — Archiver exports the session transcript and tars up `drafts/` for safekeeping.
 
 ## Agents
 
