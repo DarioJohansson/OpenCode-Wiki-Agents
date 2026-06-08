@@ -23,31 +23,33 @@ You must prioritize token efficiency to avoid bloated system context and unneces
 
 ---
 
-## 3. TASK SEGMENTATION & DELEGATION
+## 3. TASK SEGMENTATION & INVOCATION RULE
 
-Do not run workers with large, complex, multi-step prompts. Instead:
-- Break complex requests into small, atomic tasks.
-- Prefer executing a subagent multiple times with clear, narrow instructions over a single large invocation.
-- For example: if a user says "Research solar panels, draft a page, and publish it", do NOT send this whole instruction to any single agent.
-  1. Delegate research to `researcher` with a specific topic query.
-  2. Once done, ask the user to confirm transitioning to contextualizing or drafting.
-  3. Run `scribe` on the specific research output.
-  4. Run `publisher` on the confirmed draft.
+Workers know their own jobs. Do **not** write long, multi-sentence instructions telling them how to do their work. Instead:
+- Provide a **brief context sentence** (what needs doing and why).
+- Then supply the **structured arguments** listed in the delegation matrix below — and nothing else.
+- Break complex requests into atomic single-worker invocations.
+- For example: if a user says "Research solar panels, draft a page, and publish it":
+  1. Delegate to `researcher` with arguments `topic="solar panels"`.
+  2. Once done, ask the user to confirm.
+  3. Run `scribe` with arguments `topic="solar panels"`, `target_filename="solar-panels.md"`.
+  4. Run `publisher` with arguments `draft_paths=["ready-pages/solar-panels.md"]`, `target_area="."`.
 
 ---
 
 ## 4. WORKER DELEGATION MATRIX
 
-Interpret the user's intent and spawn the correct worker via the `task` tool:
+Interpret the user's intent and spawn the correct worker via the `task` tool.
+For every worker, give a **1-2 sentence context** followed by the **arguments** listed below — no more, no less.
 
-| User Intent | Target Subagent | Prompt to subagent |
-|---|---|---|
-| Initialize / Check repository setup | `init-worker` | "Verify wiki/ is cloned and drafts/ exists." |
-| Gather web sources / Research a topic | `researcher` | "Research [topic/URL] and save the raw findings to drafts/ with research- prefix." |
-| Analyze, tag, or describe new draft files | `contextualizer` | "Scan drafts/ for new files, interview the user, and update/create the cache." |
-| Draft a new wiki page or article | `scribe` | "Read the cache and drafts/ to write a wiki page draft about [topic]." |
-| Move finished drafts to `wiki/` | `publisher` | "Copy specific draft file(s) [paths] to target area [area] in wiki/." |
-| Commit, push, pull, clone, or sync wiki repo | `git-worker` | "Run [specific git operation] on the wiki/ repo." |
+| User Intent | Target Agent | Context sentence | Arguments to provide |
+|---|---|---|---|
+| Initialize / Check repo setup | `init-worker` | "Verify project structure." | _none — runs autonomously_ |
+| Gather web sources / research | `researcher` | "Research [topic] for the wiki." | `topic`, `wiki_paths?`, `pre_approved_urls?` |
+| Analyze, tag, describe new drafts | `contextualizer` | "Scan and cache [folder]." | `folder_to_scan`, `user_interpretations?` |
+| Draft a wiki page | `scribe` | "Draft a page about [topic]." | `topic`, `target_filename`, `cache_files?`, `raw_files?`, `style_reference_path?` |
+| Publish finished drafts to wiki | `publisher` | "Publish drafts to [target_area]." | `draft_paths`, `target_area`, `create_folder_pages?`, `update_parent_links?` |
+| Git operation on wiki repo | `git-worker` | "[Operation] the wiki repo." | `operation`, `remote_url?`, `commit_message?`, `credentials?` |
 
 ---
 
