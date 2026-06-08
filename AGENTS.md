@@ -7,7 +7,7 @@ This project uses an ensemble of agents to help populate a wiki-style documentat
 - `drafts/` — Sandbox for unprocessed raw data and work-in-progress drafts
 
 ## Startup Instruction
-**Run `@init-worker` at the start of every session** to verify the project structure.
+The Coordinator agent runs the initialization automatically at the start of every session.
 
 ## Workflow Rules
 1. `wiki/` is READ-ONLY unless the publisher agent is explicitly told to write.
@@ -15,13 +15,11 @@ This project uses an ensemble of agents to help populate a wiki-style documentat
 3. Do NOT read or modify `wiki/` without explicit user permission.
 4. The contextualizer creates `.cache-*` files in `drafts/` — these are append-only logs.
 
-## Workflow (in order)
-1. User populates `drafts/` with raw notes, output, diagrams.
-2. (Optional) → `/research <topic>` — researcher searches web, fetches approved sources, saves raw data to `drafts/`.
-3. User says "ready" → `/contextualize` — contextualizer asks questions and builds cache.
-4. User describes the wiki page they want → `/draft <description>` — scribe produces a draft in `drafts/`.
-5. User reviews and approves → `/publish` — publisher copies draft to `wiki/`.
-6. User wants to save → `/sync` — git-worker shows diff, asks for commit message, commits and pushes.
+## Workflow (Orchestrated Pattern)
+1. The user describes what they want to achieve in natural language.
+2. The Coordinator interprets the request, segments it into specific tasks, and asks for approval on token-expensive actions.
+3. Under the hood, the Coordinator delegates tasks to specialized subagents (e.g. Researcher, Contextualizer, Scribe, Publisher, Git Worker, Archiver) using the task tool.
+4. The subagents interact with the user as needed to gather specific information, draft content, copy files, or commit changes.
 
 ## Wiki Page Format
 ```yaml

@@ -1,7 +1,25 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "build",
+  "default_agent": "coordinator",
   "agent": {
+    "coordinator": {
+      "description": "Orchestrates the wiki workflow, interprets natural language, and delegates to specialized subagents with high token efficiency",
+      "mode": "primary",
+      "prompt": "{file:.opencode/prompts/coordinator.md}",
+      "permission": {
+        "read": "allow",
+        "question": "allow",
+        "task": {
+          "init-worker": "allow",
+          "contextualizer": "allow",
+          "scribe": "allow",
+          "publisher": "allow",
+          "git-worker": "allow",
+          "researcher": "allow",
+          "archiver": "allow"
+        }
+      }
+    },
     "init-worker": {
       "description": "Verifies wiki repo and drafts directory exist, proposes fixes via git-worker if needed",
       "mode": "subagent",
@@ -76,44 +94,6 @@
         "bash": "allow",
         "question": "allow"
       }
-    }
-  },
-  "command": {
-    "contextualize": {
-      "description": "Analyze raw drafts and build information cache",
-      "template": "I'm ready to contextualize the files in drafts/. Let's go through them.",
-      "agent": "contextualizer",
-      "subtask": true
-    },
-    "draft": {
-      "description": "Create a wiki page draft from cache and user request",
-      "template": "Tell me what wiki page you'd like me to write.$ARGUMENTS",
-      "agent": "scribe",
-      "subtask": true
-    },
-    "publish": {
-      "description": "Write finalized drafts into the wiki repo",
-      "template": "Let's look at what drafts are ready to publish.",
-      "agent": "publisher",
-      "subtask": true
-    },
-    "sync": {
-      "description": "Commit and push wiki changes to remote",
-      "template": "Ready to sync the wiki repo? I'll walk you through it.",
-      "agent": "git-worker",
-      "subtask": true
-    },
-    "research": {
-      "description": "Search the web and fetch sources for a topic",
-      "template": "Help me research: $ARGUMENTS",
-      "agent": "researcher",
-      "subtask": true
-    },
-    "archive": {
-      "description": "Export session transcript and archive drafts/ into a tarball",
-      "template": "Archive the current session and drafts/ folder.",
-      "agent": "archiver",
-      "subtask": true
     }
   }
 }
