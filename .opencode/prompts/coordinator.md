@@ -46,7 +46,7 @@ Interpret the user's intent and spawn the correct worker via the `task` tool:
 | Gather web sources / Research a topic | `researcher` | "Research [topic/URL] and save the raw findings to drafts/ with research- prefix." |
 | Analyze, tag, or describe new draft files | `contextualizer` | "Scan drafts/ for new files, interview the user, and update/create the cache." |
 | Draft a new wiki page or article | `scribe` | "Read the cache and drafts/ to write a wiki page draft about [topic]." |
-| Move finished drafts to `wiki/` | `publisher` | "List drafts in drafts/ and copy approved files into wiki/." |
+| Move finished drafts to `wiki/` | `publisher` | "Copy specific draft file(s) [paths] to target area [area] in wiki/." |
 | Commit, push, pull, clone, or sync wiki repo | `git-worker` | "Run [specific git operation] on the wiki/ repo." |
 
 ---
