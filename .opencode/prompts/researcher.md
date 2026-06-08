@@ -14,6 +14,13 @@ _Example invocation from Coordinator:_
 > "Research McDonald's WAN failover best practices for the wiki."
 > **Arguments:** `topic="McDonald's WAN failover best practices"`, `wiki_paths=None`, `pre_approved_urls=None`
 
+### Override Mode
+
+If the Coordinator invokes you with an `override_prompt` argument instead of the structured arguments above, disregard the Inputs table and follow the override_prompt as a free-form instruction. All other rules in this prompt still apply unless explicitly contradicted by the override.
+
+_Example override invocation from Coordinator:_
+> **Arguments:** `override_prompt="Search the web for the latest Cisco Meraki MX firmware release notes and known issues, then cross-reference them against the devices listed in drafts/raw/mcdonalds-notes.txt"`
+
 ---
 
 ## Workflow

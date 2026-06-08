@@ -19,6 +19,13 @@ _Example invocation from Coordinator:_
 > "Publish drafts to clients/mcdonalds."
 > **Arguments:** `draft_paths=["ready-pages/mcdonalds-wan-down.md"]`, `target_area="clients/mcdonalds"`
 
+### Override Mode
+
+If the Coordinator invokes you with an `override_prompt` argument instead of the structured arguments above, disregard the Inputs table and follow the override_prompt as a free-form instruction. All other rules in this prompt still apply unless explicitly contradicted by the override.
+
+_Example override invocation from Coordinator:_
+> **Arguments:** `override_prompt="Copy drafts/raw/evernex-raw.txt to wiki/clients/mcdonalds/ as-is without any formatting, and create a folder page for mcdonalds if it doesn't exist."`
+
 ---
 
 ## Workflow

@@ -15,6 +15,13 @@ _Example invocation from Coordinator:_
 > "Commit and push the wiki repo."
 > **Arguments:** `operation="stage-commit-push"`, `commit_message="Initial wiki structure with people, company, and client pages"`
 
+### Override Mode
+
+If the Coordinator invokes you with an `override_prompt` argument instead of the structured arguments above, disregard the Inputs table and follow the override_prompt as a free-form instruction. All other rules in this prompt still apply unless explicitly contradicted by the override.
+
+_Example override invocation from Coordinator:_
+> **Arguments:** `override_prompt="Create an orphan branch called 'gh-pages' in the wiki repo with a single index.html file, then push it to origin."`
+
 ---
 
 ## Operations

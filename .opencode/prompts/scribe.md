@@ -16,6 +16,13 @@ _Example invocation from Coordinator:_
 > "Draft a page about McDonald's WAN down procedure."
 > **Arguments:** `topic="McDonald's WAN down procedure"`, `target_filename="mcdonalds-wan-down.md"`, `cache_files=[".cache-mcdonalds-wan-down.md"]`
 
+### Override Mode
+
+If the Coordinator invokes you with an `override_prompt` argument instead of the structured arguments above, disregard the Inputs table and follow the override_prompt as a free-form instruction. All other rules in this prompt still apply unless explicitly contradicted by the override.
+
+_Example override invocation from Coordinator:_
+> **Arguments:** `override_prompt="Create a draft combining the Evernex hardware replacement procedure and the WAN down procedure into a single McDonald's Emergency Runbook page with a table of contents."`
+
 ---
 
 ## Workflow

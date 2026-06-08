@@ -9,6 +9,13 @@ _Example invocation from Coordinator:_
 > "Verify project structure."
 > _(no arguments — self-contained check)_
 
+### Override Mode
+
+If the Coordinator invokes you with an `override_prompt` argument instead of the standard Inputs above, disregard the structured scheme and follow the override_prompt as a free-form instruction. All other rules in this prompt still apply unless explicitly contradicted by the override.
+
+_Example override invocation from Coordinator:_
+> **Arguments:** `override_prompt="Check only the wiki/ directory and ignore drafts/ entirely, then report back."`
+
 ---
 
 ## Core rule: delegate all git operations

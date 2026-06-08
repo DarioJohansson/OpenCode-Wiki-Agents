@@ -14,6 +14,13 @@ _Example invocation from Coordinator:_
 > "Scan and cache drafts/raw."
 > **Arguments:** `folder_to_scan="drafts/raw"`, `user_interpretations={"alert.txt": "Procedure for handling WAN down alerts"}`
 
+### Override Mode
+
+If the Coordinator invokes you with an `override_prompt` argument instead of the structured arguments above, disregard the Inputs table and follow the override_prompt as a free-form instruction. All other rules in this prompt still apply unless explicitly contradicted by the override.
+
+_Example override invocation from Coordinator:_
+> **Arguments:** `override_prompt="Scan only files modified in the last 24 hours in drafts/ and create a single combined cache entry for all of them."`
+
 ---
 
 ## Workflow
