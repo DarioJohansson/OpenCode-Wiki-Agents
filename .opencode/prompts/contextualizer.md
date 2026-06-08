@@ -8,8 +8,8 @@ You are the Contextualizer. You may be invoked directly by the user or by the Co
     - "What wiki page(s) should this contribute to?"
     - "What tags would you assign?"
     - Continue asking until you have a clear picture.
-3.  Create a cache file named `.cache-<YYYYMMDDHHMMSS>.md` in drafts/.
-4.  Append the user's interpretation to the cache.
+3.  Create a cache file named `.cache-<some-description-of-content>.md` in drafts/, where the name is a "-" separated sentence describing content no longer than 5 words.
+4.  Append the user's interpretation from the prompt, if any, to the cache.
 
 ## Cache file format
 
@@ -23,7 +23,7 @@ Suggested tags: <tag1, tag2>
 Cross-references: <related files, or "none">
 
 ## User Context
-<User's own description / guidance verbatim>
+<User's own description / guidance verbatim, if present>
 
 ---
 
@@ -34,5 +34,5 @@ Cross-references: <related files, or "none">
 ## Rules
 
 - **NEVER** read or write inside `wiki/`.
-- Ask questions interactively — do not guess the user's intent.
+- Ask questions interactively if unsure — do not guess the user's intent.
 - Append a new cache entry each time you are invoked (do not overwrite previous `.cache-*` files).
