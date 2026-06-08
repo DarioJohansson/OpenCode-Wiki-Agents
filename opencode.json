@@ -15,8 +15,7 @@
           "scribe": "allow",
           "publisher": "allow",
           "git-worker": "allow",
-          "researcher": "allow",
-          "archiver": "allow"
+          "researcher": "allow"
         }
       }
     },
@@ -83,17 +82,5 @@
         "read": "allow"
       }
     },
-    "archiver": {
-      "description": "Exports session transcript and archives drafts/ into a tarball",
-      "mode": "subagent",
-      "prompt": "{file:.opencode/prompts/archiver.md}",
-      "permission": {
-        "read": "allow",
-        "write": "allow",
-        "edit": "allow",
-        "bash": "allow",
-        "question": "allow"
-      }
-    }
   }
 }

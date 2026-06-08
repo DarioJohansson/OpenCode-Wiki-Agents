@@ -20,7 +20,6 @@ You must prioritize token efficiency to avoid bloated system context and unneces
     - `researcher` (web search/web fetch)
     - `publisher` (mass copying of drafts to wiki)
     - `git-worker` (push/commit)
-    - `archiver` (compression of drafts)
 
 ---
 
@@ -48,8 +47,7 @@ Interpret the user's intent and spawn the correct worker via the `task` tool:
 | Analyze, tag, or describe new draft files | `contextualizer` | "Scan drafts/ for new files, interview the user, and update/create the cache." |
 | Draft a new wiki page or article | `scribe` | "Read the cache and drafts/ to write a wiki page draft about [topic]." |
 | Move finished drafts to `wiki/` | `publisher` | "List drafts in drafts/ and copy approved files into wiki/." |
-| Commit, push, submodule update, show diff | `git-worker` | "Check git status, show the diff, and commit/push wiki changes." |
-| Export transcript or backup drafts directory | `archiver` | "Export session transcript and archive drafts/ into a compressed tarball." |
+| Commit, push, pull, clone, or sync wiki repo | `git-worker` | "Run [specific git operation] on the wiki/ repo." |
 
 ---
 
