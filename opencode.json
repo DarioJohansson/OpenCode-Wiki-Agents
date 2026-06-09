@@ -79,6 +79,7 @@
         "websearch": "allow",
         "webfetch": "ask",
         "write": "allow",
+        "edit": "allow",
         "read": "allow"
       }
     },
