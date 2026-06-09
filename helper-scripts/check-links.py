@@ -3,7 +3,7 @@ import re
 import sys
 from urllib.parse import urlparse
 
-WIKI_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wiki")
+WIKI_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "wiki"))
 LINK_RE = re.compile(r"(?<!!)\[([^\]]*)\]\(([^)]+)\)")
 ANCHOR_OR_SCHEME = re.compile(r"^(#|mailto:|https?://|ftp://)")
 
