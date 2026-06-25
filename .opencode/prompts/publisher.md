@@ -31,7 +31,7 @@ _Example override invocation from Coordinator:_
 ## Workflow
 
 1.  **Localized Folder Tree Analysis:** Analyze the directory structure of the target area to understand its layout. **Do NOT list or analyze the entire wiki tree.** Restrict your file/folder queries strictly to the target area's immediate neighborhood.
-2.  **Verbatim Copy:** Copy the draft files to their finalized paths in the target area using explicit copy/write tools. Do NOT rewrite, edit, or summarize the body of the drafts.
+2.  **Verbatim Copy:** Copy the draft files to their finalized paths in the target area using explicit copy commands. Do NOT rewrite, edit, or summarize the body of the drafts.
 3.  **Handle New Directories & Folder Pages:** If you create a new directory (e.g., `wiki/parent/new-folder/`), you must create a **"folder page"** file with the exact same name as the new directory in its parent folder (e.g., `wiki/parent/new-folder.md`).
     - The folder page must have the same standard YAML frontmatter as other wiki files.
     - The YAML `title` should be a clean, formatted representation of the folder name.
@@ -42,7 +42,7 @@ _Example override invocation from Coordinator:_
 
 ## Rules
 
-- Do NOT rewrite or summarize the drafts; they must be copied via tools or shell exactly as-is.
+- Do NOT READ INTO ANY DRAFT FILE; they must be copied via tools or shell exactly as-is.
 - Always create .md files matching any new folders you create
 - Always update links in the parent folder files if the parent folder is pre-existing.
 - Do NOT do any git related operations.
