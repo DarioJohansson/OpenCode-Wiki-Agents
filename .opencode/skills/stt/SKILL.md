@@ -12,48 +12,32 @@ description: >-
 
 Transcribes audio files via the internal STT service at `http://stt.internal.shld-systems.com:8000`.
 
-## Workflow
+## Usage
 
-### 1. Submit the audio file
-
-```powershell
-curl -X POST "http://stt.internal.shld-systems.com:8000/convert" -F "file=@<filepath>"
-```
-
-Replace `<filepath>` with the absolute path to the audio file provided by the user.
-
-**Response (success):**
-```json
-{"job_id":"<id string>"}
-```
-
-Extract the `job_id` from the response.
-
-### 2. Poll for results
-
-Poll `http://stt.internal.shld-systems.com:8000/results/{job_id}` periodically until the job completes.
+Run the CLI script with the path to the audio file:
 
 ```powershell
-curl -X GET "http://stt.internal.shld-systems.com:8000/results/{job_id}"
+python helper-scripts/stt-transcribe.py <filepath>
 ```
 
-**Possible status responses:**
+The script will:
+1. Upload the file via `curl.exe` multipart POST to `http://stt.internal.shld-systems.com:8000/convert`
+2. Extract the `job_id` from the response
+3. Poll `http://stt.internal.shld-systems.com:8000/results/{job_id}` every **1 minute** until complete
+4. Save the transcription as a `.txt` file alongside the original audio
+5. Print the transcription to stdout
 
-| Status | Meaning | Response |
-|--------|---------|----------|
-| `pending` | Job is queued, not yet started | `{"status":"pending","job_id":"<id>"}` |
-| `running` | Job is actively processing | `{"status":"running","job_id":"<id>"}` |
-| `completed` | Transcription done | `{"status":"completed","job_id":"<id>","result":"<transcription>"}` |
-| `error` | Job failed | `{"status":"error","job_id":"<id>","error":"<error description>"}` |
+## Status lifecycle
 
-### Polling strategy
-
-- Wait **1 minute** between polls
-- Stop polling when status is `completed` or `error`
-- Return the transcription result to the user
+| Status | Meaning |
+|--------|---------|
+| `pending` | Job is queued, not yet started |
+| `running` | Job is actively processing |
+| `completed` | Transcription done — result is returned |
+| `error` | Job failed — error description is reported |
 
 ## Notes
 
-- Use `Invoke-RestMethod` in PowerShell or `curl` for the HTTP calls
 - The file path must point to an existing audio file on this machine
-- The service returns `job_id` on successful upload — do not proceed to polling without it
+- The script saves output as `<original_filename>.txt` in the same directory
+- No external Python packages required — uses only stdlib + `curl.exe`
