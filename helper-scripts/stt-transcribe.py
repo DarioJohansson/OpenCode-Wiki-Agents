@@ -76,19 +76,26 @@ def main():
     print("Waiting 1 minute before first poll...")
     result = poll_job(job_id)
 
-    transcription = result.get("result", "")
-    if isinstance(transcription, dict):
-        transcription = transcription.get("result", json.dumps(transcription, ensure_ascii=False))
+    segments = result.get("result", {}).get("segments")
+    if isinstance(segments, list) and segments:
+        if isinstance(segments[0], dict):
+            text = "\n".join(s.get("text", "") for s in segments if "text" in s)
+        else:
+            text = "\n".join(str(s) for s in segments)
+    elif isinstance(segments, dict):
+        text = segments.get("text", json.dumps(segments, ensure_ascii=False))
+    else:
+        text = str(segments) if segments else ""
 
     out_dir = os.path.dirname(filepath)
     base = os.path.splitext(os.path.basename(filepath))[0]
     out_path = os.path.join(out_dir, f"{base}.txt")
 
     with open(out_path, "w", encoding="utf-8") as f:
-        f.write(transcription)
+        f.write(text)
 
     print(f"\nTranscription saved to {out_path}")
-    print(f"Transcript:\n{transcription}")
+    print(f"Transcript:\n{text}")
 
 
 if __name__ == "__main__":
