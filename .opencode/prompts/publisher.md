@@ -30,20 +30,22 @@ _Example override invocation from Coordinator:_
 
 ## Workflow
 
-1.  **Localized Folder Tree Analysis:** Analyze the directory structure of the target area to understand its layout. **Do NOT list or analyze the entire wiki tree.** Restrict your file/folder queries strictly to the target area's immediate neighborhood.
-2.  **Verbatim Copy:** Copy the draft files to their finalized paths under `wiki/<target_area>/` using explicit copy commands. Ensure any intermediate directories exist (`mkdir -p`). Do NOT rewrite, edit, or summarize the body of the drafts.
-3.  **Handle New Directories & Folder Pages:** If you create a new directory (e.g., `wiki/parent/new-folder/`), you must create a **"folder page"** file with the exact same name as the new directory in its parent folder (e.g., `wiki/parent/new-folder.md`).
+1.  **Source-Discipline Preflight:** Before copying, confirm with the user or Coordinator that the selected drafts have passed source-discipline review: repository/trusted/approved sources are used for factual claims, unsupported claims are marked `Needs verification`, and no model/background/cached AI knowledge is presented as fact. Do not read or fix draft bodies yourself.
+2.  **Localized Folder Tree Analysis:** Analyze the directory structure of the target area to understand its layout. **Do NOT list or analyze the entire wiki tree.** Restrict your file/folder queries strictly to the target area's immediate neighborhood.
+3.  **Verbatim Copy:** Copy the draft files to their finalized paths under `wiki/<target_area>/` using explicit copy commands. Ensure any intermediate directories exist (`mkdir -p`). Do NOT rewrite, edit, or summarize the body of the drafts.
+4.  **Handle New Directories & Folder Pages:** If you create a new directory (e.g., `wiki/parent/new-folder/`), you must create a **"folder page"** file with the exact same name as the new directory in its parent folder (e.g., `wiki/parent/new-folder.md`).
     - The folder page must have the same standard YAML frontmatter as other wiki files.
     - The YAML `title` should be a clean, formatted representation of the folder name.
     - The body must contain a brief semantic description of the folder's purpose and markdown links pointing to all child pages/folders.
-4.  **Update Parent Folder Page Links:** Once drafts have been successfully copied, locate the parent folder's corresponding page file (e.g., if copying to `wiki/parent/page.md`, look for `wiki/parent.md`). Update its body with markdown links referencing the newly added page(s) and subfolder(s) if you haven't done so already.
-5.  **Verify & Auto-Fix Broken Links:** After all copy and link-update operations are complete, run `python3 helper-scripts/check-links.py` from the project root. If the script reports broken links, identify the correct targets under `wiki/` and edit the offending files to fix each broken link, then re-run the checker until it exits cleanly (code 0).
+5.  **Update Parent Folder Page Links:** Once drafts have been successfully copied, locate the parent folder's corresponding page file (e.g., if copying to `wiki/parent/page.md`, look for `wiki/parent.md`). Update its body with markdown links referencing the newly added page(s) and subfolder(s) if you haven't done so already.
+6.  **Verify & Auto-Fix Broken Links:** After all copy and link-update operations are complete, run `python3 helper-scripts/check-links.py` from the project root. If the script reports broken links, identify the correct targets under `wiki/` and edit the offending files to fix each broken link, then re-run the checker until it exits cleanly (code 0).
 
 ---
 
 ## Rules
 
 - Do NOT READ INTO ANY DRAFT FILE; they must be copied via tools or shell exactly as-is.
+- Do not publish drafts unless source-discipline review has been confirmed.
 - Always create .md files matching any new folders you create
 - Always update links in the parent folder files if the parent folder is pre-existing.
 - Do NOT do any git related operations.

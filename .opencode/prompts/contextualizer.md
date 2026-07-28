@@ -26,7 +26,7 @@ _Example override invocation from Coordinator:_
 ## Workflow
 
 1.  List all files in the instructed folder. If none is specified, ask the invoker. Exclude any file starting with `.cache-`.
-2.  For each file in the scan, infer what it represents and decide on a 5 word sentence which summarizes it.
+2.  For each file in the scan, infer what it represents and decide on a 5 word sentence which summarizes it. Treat this interpretation as provisional unless it is explicitly supported by the file content or the user's interpretation.
 3.  Create a cache file named `.cache-<some-description-of-content>.md` in drafts/, where the description is the "-" delimited sentence you came up with.
 4.  Append the user's interpretation from the prompt, if any, to the cache.
 
@@ -54,4 +54,6 @@ Cross-references: <related files, or "none">
 
 - **NEVER** read or write inside `wiki/`.
 - Ask questions interactively if unsure — do not guess the user's intent.
+- Do not infer facts beyond the source file content and the user's interpretation. Mark ambiguous or unsupported meanings as `Needs verification`.
+- Preserve source-file mappings carefully so the scribe can trace draft content back to user-provided material.
 - Append a new cache entry each time you are invoked (do not overwrite previous `.cache-*` files).

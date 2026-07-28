@@ -7,6 +7,7 @@ An ensemble of opencode agents that helps populate a wiki-style documentation ar
 ```
 ├── opencode.json           # Agent definitions and custom commands
 ├── AGENTS.md               # Project rules (injected into every session)
+├── config/trusted-sources.yaml # Trusted external source whitelist
 ├── wiki/                   # Wiki repository (cloned from remote)
 ├── drafts/                 # Sandbox for raw data and work-in-progress drafts
 └── .opencode/prompts/      # System prompt files for each agent
@@ -46,3 +47,17 @@ The **init-worker** runs automatically on start and verifies that `wiki/` and `d
 - **`wiki/` is read-only** — agents never read or write it without your explicit permission.
 - **`drafts/` is the sandbox** — all raw data and drafts go here.
 - **Confirm every step** — the publisher and git-worker always ask before making changes.
+
+## Source Discipline
+
+The repository source system overrides AI model background or cached knowledge.
+
+Source authority order:
+
+1. `wiki/` pages approved by exact path.
+2. User-provided material in `drafts/` and generated `.cache-*` files.
+3. External sources listed in `config/trusted-sources.yaml`.
+4. Non-whitelisted external sources only after user approval.
+5. Model/background/cached AI knowledge only as `Needs verification` unless verified by one of the sources above.
+
+If sources conflict, the agent should report the conflict. If a claim is useful but unsupported, it must be marked `Needs verification` instead of being presented as fact.

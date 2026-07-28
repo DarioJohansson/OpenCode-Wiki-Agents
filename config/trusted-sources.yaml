@@ -1,0 +1,31 @@
+# OpenCode-Wiki-Agents Trusted Sources Whitelist
+#
+# Repository sources remain primary:
+# - wiki/ pages that the user approved reading
+# - drafts/ user-provided source material and generated caches
+#
+# Domains listed here are approved external sources. Online sources outside
+# this whitelist require explicit user approval before they are fetched or used.
+# Ask the user before adding new trusted domains.
+
+trusted_domains:
+  - kubernetes.io
+  - helm.sh
+  - developer.hashicorp.com
+  - docs.github.com
+  - docs.gitlab.com
+  - docs.rancher.com
+  - goharbor.io
+  - jenkins.io
+  - docs.n8n.io
+  - docs.paloaltonetworks.com
+  - cisco.com
+  - extremenetworks.com
+  - pve.proxmox.com
+  - docs.vmware.com
+  - finops.org
+  - atlassian.com
+  - opencode.ai
+  - trivy.dev
+  - github.com
+  - aquasec.com

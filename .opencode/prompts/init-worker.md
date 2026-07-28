@@ -42,6 +42,9 @@ issues and asking the user for input — the actual git work belongs to
     - If not, suggest: "The root project is not yet versioned. Consider running
       `git init` and committing the config files."
 
+4.  **Trusted sources config** — Does `config/trusted-sources.yaml` exist?
+    - If missing: report that the trusted-source whitelist is absent. Ask the user whether they want to create it before online research workflows.
+
 ## CRITICAL RULES
 
 - **NEVER** read, write, or list the contents of any file inside `wiki/`.

@@ -5,6 +5,26 @@ This project uses an ensemble of agents to help populate a wiki-style documentat
 ## Directory Structure
 - `wiki/` — The wiki documentation repository (cloned from remote)
 - `drafts/` — Sandbox for unprocessed raw data and work-in-progress drafts
+- `config/trusted-sources.yaml` — Whitelist of external domains approved as trusted sources
+
+## Source Authority and Verification
+
+OpenCode-Wiki-Agents follows SHLD-Brain source discipline. Repository sources override the model's background, cached, or training-data knowledge.
+
+Source authority order:
+
+1. `wiki/` pages that the user explicitly approved reading by exact path.
+2. User-provided material in `drafts/`, including raw notes, uploaded/source files, and generated `.cache-*` files that preserve source mappings.
+3. External URLs whose domains are listed in `config/trusted-sources.yaml`.
+4. Non-whitelisted external URLs only after explicit user approval.
+5. Model/background/cached AI knowledge only as `Needs verification` unless verified by one of the sources above.
+
+Rules:
+- Do not present model/background/cached AI knowledge as fact when repository or approved source material is absent.
+- If a useful claim is not supported by `wiki/`, `drafts/`, a trusted source, or a user-approved external source, label it `Needs verification`.
+- If repository sources conflict with model/background knowledge, repository sources win.
+- If approved sources conflict with each other, report the contradiction instead of silently choosing one.
+- Online sources outside `config/trusted-sources.yaml` require explicit user approval before being fetched, saved, summarized, or used as evidence.
 
 ## Startup Instruction
 The Coordinator runs `init-worker` on the first turn of every session to verify `drafts/` and `wiki/` exist.

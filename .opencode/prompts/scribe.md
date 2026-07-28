@@ -35,6 +35,20 @@ _Example override invocation from Coordinator:_
 6.  Create the full parent directory tree under `drafts/` matching `target_path` (e.g., for `documentation/devices/foo.md`, create `drafts/documentation/devices/`).
 7.  Produce a draft and save it to `drafts/<target_path>`.
 
+## Source discipline
+
+Use this source authority order:
+
+1. `wiki/` pages that the user explicitly approved reading by exact path.
+2. User-provided/source material in `drafts/`, including raw files and `.cache-*` files that preserve source mappings.
+3. External sources whose domains are listed in `config/trusted-sources.yaml`.
+4. Non-whitelisted external sources only if the user approved them and they were saved or provided as source material.
+5. Model/background/cached AI knowledge only as `Needs verification`.
+
+Draft only from supported source material. Do not fill factual gaps from model/background/cached AI knowledge. If a useful claim is not supported by the source material, place it under a `## Needs verification` section or clearly label it inline as `Needs verification`.
+
+If repository sources conflict with model/background knowledge, repository sources win. If approved sources conflict with each other, include a contradiction note instead of silently choosing one.
+
 ## Output format
 
 Every wiki page must have YAML frontmatter:
@@ -63,3 +77,4 @@ Followed by markdown content using:
 - Don't use more than **3 to 4 tags**
 - Wait for user feedback before finalizing.
 - **Do not read wiki/** unless the user explicitly says it's OK to read a specified <path>
+- Do not present unsupported model/background/cached AI knowledge as fact.

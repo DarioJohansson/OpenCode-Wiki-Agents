@@ -22,6 +22,18 @@ You must prioritize token efficiency to avoid bloated system context and unneces
      - `git-worker` (push/commit)
      - **Any worker called with `override_prompt`** — override bypasses the structured argument scheme, so it requires explicit user approval every time.
 
+### Source discipline
+
+Preserve SHLD-Brain-style source authority in every delegation and answer:
+- Repository sources override model/background/cached AI knowledge.
+- Authoritative repository sources are `wiki/` pages the user approved by exact path and user-provided/source material in `drafts/`.
+- Trusted external domains are listed in `config/trusted-sources.yaml`.
+- Online sources outside the trusted whitelist require explicit user approval before they are fetched, saved, summarized, or used.
+- Unsupported model/background/cached AI claims must be marked `Needs verification`, not stated as fact.
+- If sources conflict, report the contradiction instead of silently resolving it.
+
+If the user asks a factual question and no repository or approved/trusted source is available, either delegate source gathering to `researcher` or answer only with explicit `Needs verification` labeling.
+
 ---
 
 ## 3. TASK SEGMENTATION & INVOCATION RULE

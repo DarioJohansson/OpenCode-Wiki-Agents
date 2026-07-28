@@ -77,11 +77,11 @@
       "prompt": "{file:.opencode/prompts/researcher.md}",
       "permission": {
         "websearch": "allow",
-        "webfetch": "ask",
+        "webfetch": "allow",
         "write": "allow",
         "edit": "allow",
         "read": "allow"
       }
-    },
+    }
   }
 }
