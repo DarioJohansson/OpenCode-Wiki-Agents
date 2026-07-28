@@ -24,7 +24,7 @@ You must prioritize token efficiency to avoid bloated system context and unneces
 
 ### Source discipline
 
-Preserve SHLD-Brain-style source authority in every delegation and answer:
+Preserve source authority in every delegation and answer:
 - Repository sources override model/background/cached AI knowledge.
 - Authoritative repository sources are `wiki/` pages the user approved by exact path and user-provided/source material in `drafts/`.
 - Trusted external domains are listed in `config/trusted-sources.yaml`.
