@@ -33,8 +33,8 @@ Workers know their own jobs. Do **not** write long, multi-sentence instructions 
 - For example: if a user says "Research solar panels, draft a page, and publish it":
   1. Delegate to `researcher` with arguments `topic="solar panels"`.
   2. Once done, ask the user to confirm.
-  3. Run `scribe` with arguments `topic="solar panels"`, `target_filename="solar-panels.md"`.
-  4. Run `publisher` with arguments `draft_paths=["ready-pages/solar-panels.md"]`, `target_area="."`.
+  3. Run `scribe` with arguments `topic="solar panels"`, `target_path="solar-panels.md"`.
+  4. Run `publisher` with arguments `draft_paths=["solar-panels.md"]`, `target_area="."`.
 
 ---
 
@@ -48,7 +48,7 @@ For every worker, give a **1-2 sentence context** followed by the **arguments** 
 | Initialize / Check repo setup | `init-worker` | "Verify project structure." | _none — runs autonomously_ |
 | Gather web sources / research | `researcher` | "Research [topic] for the wiki." | `topic`, `wiki_paths?`, `pre_approved_urls?`, `raw_files?` |
 | Analyze, tag, describe new drafts | `contextualizer` | "Scan and cache [folder]." | `folder_to_scan`, `user_interpretations?` |
-| Draft a wiki page | `scribe` | "Draft a page about [topic]." | `topic`, `target_filename`, `cache_files?`, `raw_files?`, `style_reference_path?` |
+| Draft a wiki page | `scribe` | "Draft a page about [topic]." | `topic`, `target_path`, `cache_files?`, `raw_files?`, `style_reference_path?` |
 | Publish finished drafts to wiki | `publisher` | "Publish drafts to [target_area]." | `draft_paths`, `target_area`, `create_folder_pages?`, `update_parent_links?` |
 | Git operation on wiki repo | `git-worker` | "[Operation] the wiki repo." | `operation`, `remote_url?`, `commit_message?`, `credentials?` |
 | **Override — any worker** (edge cases) | _any_ | _(use your own context sentence)_ | `override_prompt` (full free-form instruction) |
