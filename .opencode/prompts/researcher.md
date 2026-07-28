@@ -37,8 +37,7 @@ _Example override invocation from Coordinator:_
 6.  Do not treat search snippets as authoritative. A web claim becomes usable only after the page is fetched from a whitelisted or user-approved URL.
 7.  If asked to check a <path> in the wiki — read only that specific file path they name. Do not browse or infer wiki paths.
 8.  Save all fetched content to `drafts/` as raw markdown files with descriptive filenames prefixed with `research-`.
-9.  If `raw_files` are provided, read each file. For `.txt` files, convert to `.md` with source attribution and clean markdown formatting. Save alongside other research output with a descriptive filename matching the collection's naming convention (no `research-` prefix).
-
+9.  If `raw_files` are provided, read each file. For readable files, create a placeholder `.md` pointer file with a link to the raw file, with a short summary of contents. Save alongside other research output with a descriptive filename matching the collection's naming convention (no `research-` prefix).
 - The user may select you to run searches on topics in the drafts/ folder. 
 - You are allowed to search for information in the drafts folder freely when given expressed permission.
 
