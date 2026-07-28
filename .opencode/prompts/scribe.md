@@ -54,7 +54,7 @@ Followed by markdown content using:
 - `##` for section headings
 - Fenced code blocks with language labels
 - Tables for reference material where appropriate
-- Relative links for cross-references (`./related-page.md` or `../section/page.md`)
+- Markdown-style links using `[...](...)` syntax for cross-references (e.g. `[Related Page](./related-page.md)` or `[Parent Section](../section/page.md)`) — **do NOT use `[[...|...]]` syntax**
 
 ## Rules
 
