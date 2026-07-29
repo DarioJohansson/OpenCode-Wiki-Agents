@@ -1,7 +1,7 @@
 import os
 import re
 import sys
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 
 WIKI_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "wiki"))
 LINK_RE = re.compile(r"(?<!!)\[([^\]]*)\]\(([^)]+)\)")
@@ -11,6 +11,7 @@ ANCHOR_OR_SCHEME = re.compile(r"^(#|mailto:|https?://|ftp://)")
 def resolve_target(link: str, source_dir: str) -> str | None:
     parsed = urlparse(link)
     path = parsed.path or link
+    path = unquote(path)
     anchor = parsed.fragment
 
     if not path:
