@@ -4,7 +4,7 @@ This project uses an ensemble of agents to help populate a wiki-style documentat
 
 ## Directory Structure
 - `wiki/` — The wiki documentation repository (cloned from remote)
-- `drafts/` — Sandbox for unprocessed raw data and work-in-progress drafts
+- `drafts/` — Sandbox for unprocessed raw data and work-in-progress drafts. The scribe recreates the wiki folder tree inside a chosen `draft_folder` here, so the publisher can copy it straight into `wiki/`.
 - `config/trusted-sources.yaml` — Whitelist of external domains approved as trusted sources
 
 ## Source Authority and Verification
@@ -41,8 +41,8 @@ The **Coordinator must never** perform domain work itself. All specific write op
 | Search the web or fetch a URL | `researcher` | Requires user approval first. Provide: `topic`, optional `wiki_paths`, `pre_approved_urls`, `raw_files`. |
 | Read content from `wiki/` | `researcher` | Provide exact `wiki_paths` the user approved. |
 | Scan files in `drafts/` and build a cache | `contextualizer` | Provide `folder_to_scan`, optional `user_interpretations` file-name→description mapping. |
-| Draft a new wiki page | `scribe` | Provide `topic`, `target_filename`. The scribe writes to `drafts/` — never to `wiki/`. |
-| Publish finished drafts to `wiki/` | `publisher` | Requires user approval first. Provide `draft_paths`, `target_area`. The publisher copies files verbatim into `wiki/`. |
+| Draft a new wiki page | `scribe` | Provide `topic`, `draft_folder`, `wiki_path`. The scribe recreates the wiki folder tree inside the draft folder and writes to `drafts/` — never to `wiki/`. |
+| Publish finished drafts to `wiki/` | `publisher` | Requires user approval first. Provide `draft_folder`, `wiki_paths`. The publisher copies the mirrored tree verbatim from `drafts/` into `wiki/`. |
 | Clone, pull, commit, or push the wiki repo | `git-worker` | Requires user approval first. Provide `operation`, optional `commit_message`. |
 | Anything else not covered above | Ask the user | Do not improvise. Ask for clarification and use `override_prompt` on the appropriate sub-agent only after user approval. |
 

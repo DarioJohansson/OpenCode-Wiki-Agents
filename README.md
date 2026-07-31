@@ -38,8 +38,8 @@ The **init-worker** runs automatically on start and verifies that `wiki/` and `d
 | **init-worker** | runs automatically | Verifies `wiki/` is a valid git repo and `drafts/` exists |
 | **researcher** | `/research` | Searches the web, groups URLs semantically, fetches with user approval, saves raw data to `drafts/` |
 | **contextualizer** | `/contextualize` | Interprets raw files by asking you questions, creates append-only cache |
-| **scribe** | `/draft <description>` | Produces wiki-formatted markdown drafts with YAML frontmatter |
-| **publisher** | `/publish` | Writes confirmed drafts from `drafts/` into `wiki/` |
+| **scribe** | `/draft <description>` | Produces wiki-formatted markdown drafts with YAML frontmatter, mirroring the wiki path under a chosen draft folder |
+| **publisher** | `/publish` | Copies the mirrored draft tree verbatim from `drafts/` into `wiki/` |
 | **git-worker** | `/sync` | Stages, commits, and pushes with user confirmation at each step |
 
 ## Important Rules
