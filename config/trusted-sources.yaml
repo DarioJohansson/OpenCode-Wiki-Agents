@@ -29,3 +29,4 @@ trusted_domains:
   - trivy.dev
   - github.com
   - aquasec.com
+  - docs.aws.amazon.com
